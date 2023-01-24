@@ -3,14 +3,19 @@ const { CloudinaryStorage } = require('multer-storage-cloudinary');
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-    api_key: process.env.CLOUDINARY_APIKEY,
-    api_secret: CLOUDINARY_SECRETKEY
-})
+    api_key: process.env.CLOUDINARY_KEY,
+    api_secret: process.env.CLOUDINARY_SECRET
+});
 
 const storage = new CloudinaryStorage({
-    cloudinary: cloudinary,
-      folder: 'YelpCamp',
-      format: ['jpeg', 'png', 'jpg']
+    cloudinary,
+    params: {
+        folder: 'YelpCamp',
+        allowedFormats: ['jpeg', 'png', 'jpg']
+    }
 });
-  
-module.exports = {cloudinary, storage};
+
+module.exports = {
+    cloudinary,
+    storage
+}
